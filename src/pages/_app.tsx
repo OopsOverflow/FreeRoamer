@@ -1,16 +1,23 @@
 import React from 'react';
 import '../styles/globals.css';
 import { SessionProvider } from "next-auth/react"
-import type { AppProps } from 'next/app';
+import { ChakraProvider } from '@chakra-ui/react';
+import theme from "../theme";
+import AppLayout from "../components/AppLayout";
 
-export default function App({  Component,  pageProps: { session, ...pageProps }} 
+
+export default function App({  Component,  pageProps: { session, ...pageProps }}
   : {
     Component: React.FC,
     pageProps: any,
   }) {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+        <ChakraProvider theme={theme}>
+          <AppLayout>
+            <Component {...pageProps} />
+          </AppLayout>
+        </ChakraProvider>
     </SessionProvider>
   )
 }
