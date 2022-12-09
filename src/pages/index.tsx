@@ -2,8 +2,10 @@ import React from 'react';
 import Head from 'next/head';
 import {Button, Flex, Heading, useColorMode, useColorModeValue} from '@chakra-ui/react';
 import Link from "next/link";
+import { useSession } from 'next-auth/react';
 
 export default function Home() {
+  const { data, status } = useSession();
   const { toggleColorMode: toggleMode } = useColorMode();
   const bg = useColorModeValue('red', 'teal')
   return (
@@ -15,7 +17,7 @@ export default function Home() {
         gap={5}
       >
         <Heading as={'h1'} size={'xl'}>
-          Hello World!
+         {status === "authenticated"? <span>{`${data?.user?.name} `} is Logged in</span>: <span>Hello World</span>}
         </Heading>
         <Button
           onClick={toggleMode}

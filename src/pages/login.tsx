@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Button,
@@ -18,25 +18,20 @@ import {
 } from '@chakra-ui/react';
 import { OAuthButtonGroup } from '../components/Auth/OAuthButtonGroup';
 import { PasswordField } from '../components/Auth/PasswordField';
-import { Logo } from '../components/Logo';
-import {useSession} from "next-auth/react";
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 
 function Login() {
-  const { data: session, status } = useSession();
-  console.log(session);
+  const { status } = useSession();
 
-  if (status === "loading")
-    return <div>Loading ...</div>;
+  const router = useRouter();
 
-  else if (status === "authenticated"){
-    return (
-      <div>
-        <h1>You are signed in </h1>
-        <p>{`${session.user}`}</p>
-      </div>
-    );
-  } else {
+  useEffect(() => {
+    if (status === "authenticated")
+      router.push("/");
+  }, [status]);
+
 
     return (
       <Center
@@ -50,7 +45,6 @@ function Login() {
         >
           <Stack spacing="8">
             <Stack spacing="6">
-              <Logo/>
               <Stack spacing={{base: '2', md: '3'}} textAlign="center">
                 <Heading size={useBreakpointValue({base: 'xs', md: 'sm'})}>
                   Log in to your account
@@ -103,7 +97,7 @@ function Login() {
         </Container>
       </Center>
     );
-  }
+    
 }
 
 export default Login;

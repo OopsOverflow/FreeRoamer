@@ -22,6 +22,7 @@ import { FaBars, FaMapMarked, FaRegWindowClose } from 'react-icons/fa';
 import { Logo } from '../Logo';
 import ColorModeToggle from './ColorModeToggle';
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 
 const Links = ['Posts', 'History', 'Settings'];
 
@@ -100,7 +101,7 @@ export default function NavBar() {
                 <MenuItem>Link 1</MenuItem>
                 <MenuItem>Link 2</MenuItem>
                 <MenuDivider />
-                <MenuItem>Sign Out</MenuItem>
+                <MenuItem onClick={() => signOut()}>Sign Out</MenuItem>
               </MenuList>
             </Menu>
           </Flex>

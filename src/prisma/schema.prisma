@@ -43,6 +43,7 @@ model User {
   name          String
   email         String?   @unique
   emailVerified DateTime?
+  password      String?
   image         String?
   accounts      Account[]
   sessions      Session[]
@@ -55,3 +56,5 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+// path with images
