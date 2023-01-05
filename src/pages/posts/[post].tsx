@@ -3,21 +3,14 @@ import PostPage from '@components/PostPage';
 import React from 'react';
 import DashboardLayout from '@layouts/DashboardLayout';
 import { useRouter } from 'next/router';
-import type { Post, User, Image } from '@prisma/client';
+import type { Post, User } from '@prisma/client';
 import prisma from '@lib/client';
 
-export default function Post({
-  post,
-}: {
-  post: Post & { author: User; images: Image[] };
-}) {
+export default function Post({ post }: { post: Post & { author: User } }) {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
-
-  // get all the image srcs from the post
-  const images = post.images.map((image) => image.src);
 
   return (
     <Flex
@@ -34,7 +27,7 @@ export default function Post({
         description={post.description}
         likes={11}
         author={post.author.name as string}
-        images={images}
+        images={post.images}
         avatarUrl={post.author.image ?? ''}
         time={post.timeToComplete ?? ''}
       />
@@ -50,7 +43,6 @@ export async function getServerSideProps({ params }: { params: any }) {
     },
     include: {
       author: true,
-      images: true,
     },
   });
 
