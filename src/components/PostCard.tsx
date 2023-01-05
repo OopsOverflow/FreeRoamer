@@ -30,14 +30,38 @@ const PostCard = ({
   const { colorMode } = useColorMode();
   const [isLiked, setIsLiked] = React.useState(false);
   const [likeCount, setLikeCount] = React.useState(likes);
-  const handleLike = (event: any) => {
-    event.preventDefault();
-    setIsLiked(!isLiked);
+
+  // handle call to like or unlike a post using fetch
+  const handleLike = async (e: any) => {
+    e.preventDefault();
     if (isLiked) {
       setLikeCount(likeCount - 1);
+      console.log(id);
+      await fetch(`/api/like-post`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          id: id,
+          action: 'unlike',
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
     } else {
       setLikeCount(likeCount + 1);
+      console.log(id);
+      await fetch(`/api/like-post`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          id: id,
+          action: 'like',
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
     }
+    setIsLiked(!isLiked);
   };
 
   const icon = () => {

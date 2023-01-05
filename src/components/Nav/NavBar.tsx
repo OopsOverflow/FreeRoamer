@@ -135,7 +135,7 @@ export default function NavBar() {
                 <Link href={'/register-route'} passHref>
                   <MenuItem as={'a'}>Register Route</MenuItem>
                 </Link>
-                <Link href={'/register-route'} passHref>
+                <Link href={'/account'} passHref>
                   <MenuItem as={'a'}>My Profile</MenuItem>
                 </Link>
                 <MenuDivider />
