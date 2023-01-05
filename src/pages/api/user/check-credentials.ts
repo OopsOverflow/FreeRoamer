@@ -1,13 +1,13 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../../lib/client"
-import sha256 from "crypto-js/sha256";
-import { omit } from "lodash";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import prisma from '../../../lib/client';
+import sha256 from 'crypto-js/sha256';
+// import { omit } from "lodash";
 
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     await handlePOST(req, res);
   } else {
     throw new Error(
@@ -33,8 +33,9 @@ async function handlePOST(req: NextApiRequest, res: NextApiResponse) {
     },
   });
   if (user && user.password == hashPassword(req.body.password)) {
-    res.json(omit(user, "password"));
+    // res.json(omit(user, "password"));
+    res.status(200);
   } else {
-    res.status(400).end("Invalid credentials");
+    res.status(400).end('Invalid credentials');
   }
 }
