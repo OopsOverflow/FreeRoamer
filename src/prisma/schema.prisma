@@ -71,6 +71,8 @@ model Post {
   timeToComplete String?
   activityType   String?
   difficulty     String?
+  distance       String?
+  elevationGain  String?
   likes          Int       @default(0)
   comments       Comment[]
   images         String[]

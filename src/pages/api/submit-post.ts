@@ -19,6 +19,8 @@ export default async function handler(
       imageUrls,
       mapUrl,
       userId,
+      distance,
+      averageElevationGain,
     } = req.body as {
       title: string;
       timeToComplete: string;
@@ -28,6 +30,8 @@ export default async function handler(
       imageUrls: string[];
       mapUrl: string;
       userId: string;
+      distance: number;
+      averageElevationGain: number;
     };
 
     const post = await prisma.post.create({
@@ -44,6 +48,8 @@ export default async function handler(
           },
         },
         images: imageUrls,
+        distance: distance.toString().slice(0, 5),
+        elevationGain: averageElevationGain.toString().slice(0, 5),
       },
     });
 

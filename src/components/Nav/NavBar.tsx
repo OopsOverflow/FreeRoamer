@@ -24,10 +24,7 @@ import ColorModeToggle from './ColorModeToggle';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 
-const Links = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-];
+const Links = [{ name: 'Home', href: '/' }];
 
 const NavLink = (
   props: ComponentPropsWithoutRef<'a'> & { children: ReactNode; href: string },
@@ -135,16 +132,12 @@ export default function NavBar() {
                 <Avatar size={'sm'} src={session?.user?.image ?? ''} />
               </MenuButton>
               <MenuList>
-                <MenuItem>
-                  <Link href={'/register-route'} passHref>
-                    <a>Register Route</a>
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link href={'/register-route'} passHref>
-                    <a>My Profile</a>
-                  </Link>
-                </MenuItem>
+                <Link href={'/register-route'} passHref>
+                  <MenuItem as={'a'}>Register Route</MenuItem>
+                </Link>
+                <Link href={'/register-route'} passHref>
+                  <MenuItem as={'a'}>My Profile</MenuItem>
+                </Link>
                 <MenuDivider />
                 <MenuItem onClick={() => signOut()}>Sign Out</MenuItem>
               </MenuList>

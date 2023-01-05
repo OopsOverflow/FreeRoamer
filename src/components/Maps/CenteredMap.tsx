@@ -9,7 +9,15 @@ import Map, {
 import React from 'react';
 import * as turf from '@turf/turf';
 
-function CenteredMap({ geojson }: { geojson: any }) {
+function CenteredMap({
+  geojson,
+  width,
+  height,
+}: {
+  geojson: any;
+  width?: string;
+  height?: string;
+}) {
   // Only render the map component if geojson is truthy
   if (geojson) {
     const enclosingArea = turf.envelope(geojson);
@@ -45,6 +53,9 @@ function CenteredMap({ geojson }: { geojson: any }) {
       setViewState(viewState);
     }, []);
 
+    const mapW = width ? width : '100vw';
+    const mapH = height ? height : 600;
+
     return (
       <Map
         initialViewState={{
@@ -56,7 +67,7 @@ function CenteredMap({ geojson }: { geojson: any }) {
         dragRotate={true}
         maxZoom={20}
         minZoom={1}
-        style={{ width: '100vw', height: 600 }}
+        style={{ width: mapW, height: mapH }}
         mapStyle="mapbox://styles/mapbox/outdoors-v11"
         mapboxAccessToken={process.env.MAPBOX_TOKEN}
         terrain={{

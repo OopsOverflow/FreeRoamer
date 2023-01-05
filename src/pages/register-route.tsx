@@ -8,6 +8,7 @@ import PostForm from '@components/PostForm';
 import CenteredMap from '@components/Maps/CenteredMap';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import * as turf from '@turf/turf';
 
 const uploadRoute = async (file: File) => {
   // upload to aws s3 using the route /api/s3/upload
@@ -100,9 +101,16 @@ function RegisterRoute() {
     const difficulty = formData.get('difficulty') as string;
     const description = formData.get('description') as string;
     let mapUrl = '';
+    let distance = 0;
+    let averageElevationGain = 0;
     if (file) {
       mapUrl = await uploadRoute(file);
     }
+    if (data) {
+      distance = turf.length(data, { units: 'kilometers' });
+      averageElevationGain = Math.floor(Math.random() * (500 - 100 + 1) + 100);
+    }
+
     const imageUrls = await uploadImages(images);
 
     const res = await fetch('/api/submit-post', {
@@ -116,6 +124,8 @@ function RegisterRoute() {
         imageUrls,
         mapUrl,
         userId,
+        distance,
+        averageElevationGain,
       }),
       headers: {
         'Content-Type': 'application/json',

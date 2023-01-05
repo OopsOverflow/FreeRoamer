@@ -22,11 +22,15 @@ interface StatData {
   percentage: string;
 }
 
-const statData = (time: string): StatData[] => [
+const statData = (
+  time: string,
+  distance: string,
+  elevation: string,
+): StatData[] => [
   {
     id: 1,
     label: 'Distance (km)',
-    score: '1730',
+    score: distance,
     icon: FaMap,
     percentage: '10%',
   },
@@ -35,22 +39,30 @@ const statData = (time: string): StatData[] => [
     label: 'Total Time',
     score: time,
     icon: FaClock,
-    percentage: '30%',
+    percentage: Math.floor(Math.random() * 100).toString() + '%',
   },
   {
     id: 3,
     label: 'Avg. Elevation (m)',
-    score: '100',
+    score: elevation,
     icon: FaWeight,
-    percentage: '30%',
+    percentage: Math.floor(Math.random() * 100).toString() + '%',
   },
 ];
 
-const Stats = ({ time }: { time: string }) => {
+const Stats = ({
+  time,
+  distance,
+  elevation,
+}: {
+  time: string;
+  distance: string;
+  elevation: string;
+}) => {
   return (
     <Container minWidth={'full'} mx={'auto'} p={{ base: 5, md: 10 }}>
       <SimpleGrid columns={{ sm: 2, md: 3 }} spacing={5} mt={6} mb={4}>
-        {statData(time).map((data, index) => (
+        {statData(time, distance, elevation).map((data, index) => (
           <Card key={index} data={data} />
         ))}
       </SimpleGrid>

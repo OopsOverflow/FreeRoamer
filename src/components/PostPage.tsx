@@ -11,32 +11,15 @@ import {
   Divider,
 } from '@chakra-ui/react';
 import React from 'react';
-import Map from 'react-map-gl';
 import { FaArrowLeft, FaHeart } from 'react-icons/fa';
 import Carousel from '@components/Carousel';
 import NextLink from 'next/link';
 import Stats from '@components/Stats';
 import Comments from '@components/Comments';
-import process from 'process';
-
-interface PostPageProps {
-  title: string;
-  description: string;
-  likes: number;
-  time: string;
-  author: string;
-  images: string[];
-  avatarUrl: string;
-}
-const PostPage: React.FC<PostPageProps> = ({
-  title,
-  images,
-  description,
-  author,
-  avatarUrl,
-  likes,
-  time,
-}) => {
+import type { Post } from '@prisma/client';
+import { User } from '@prisma/client';
+import PostMap from '@components/Maps/PostMap';
+const PostPage: React.FC<{ post: Post & { author: User } }> = ({ post }) => {
   return (
     <Box
       display={'flex'}
@@ -66,7 +49,7 @@ const PostPage: React.FC<PostPageProps> = ({
         alignItems={'center'}
         width={'100%'}
       >
-        <Carousel cards={images} />
+        <Carousel cards={post.images} />
       </Flex>
       <Text
         as="h1"
@@ -74,7 +57,7 @@ const PostPage: React.FC<PostPageProps> = ({
         mt={6}
         fontSize={{ base: '3xl', md: '4xl' }}
       >
-        {title}
+        {post.title}
       </Text>
       <Flex
         direction={{ base: 'column', md: 'row' }}
@@ -88,12 +71,18 @@ const PostPage: React.FC<PostPageProps> = ({
       >
         <Flex alignItems={'center'} my={'auto'}>
           <Tag size={'lg'} colorScheme={'brand'} borderRadius={'full'}>
-            <Avatar name={author} size={'xs'} ml={-2} mr={2} src={avatarUrl} />
-            {author}
+            <Avatar
+              name={post.author.name ?? 'Anon'}
+              size={'xs'}
+              ml={-2}
+              mr={2}
+              src={post.author.image ?? ''}
+            />
+            {post.author.name ?? 'Anon'}
           </Tag>
           <Text color={useColorModeValue('gray.700', 'gray.300')} ml={1}>
             {' • '}
-            {'MMMM dd yyyy'}
+            {'Jan 05 2023'}
           </Text>
         </Flex>
         <HStack
@@ -109,7 +98,7 @@ const PostPage: React.FC<PostPageProps> = ({
         >
           <FaHeart />
           <Text mt={1} fontSize="xs">
-            {likes}
+            {post.likes}
           </Text>
         </HStack>
       </Flex>
@@ -117,20 +106,15 @@ const PostPage: React.FC<PostPageProps> = ({
         fontSize={{ base: 'sm', md: 'md' }}
         color={useColorModeValue('gray.700', 'gray.400')}
       >
-        <Text>{description}</Text>
+        <Text>{post.description}</Text>
       </Box>
       <Divider mt={10} mb={10} mx={'auto'} />
-      <Map
-        initialViewState={{
-          longitude: -122.4,
-          latitude: 37.8,
-          zoom: 14,
-        }}
-        style={{ width: '100%', height: '400px' }}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
-        mapboxAccessToken={process.env.MAPBOX_TOKEN}
+      <PostMap mapUrl={post.mapUrl} />
+      <Stats
+        time={post.timeToComplete ?? 'ERR'}
+        distance={post.distance ?? 'ERR'}
+        elevation={post.elevationGain ?? 'ERR'}
       />
-      <Stats time={time} />
       <Divider mt={10} mb={10} mx={'auto'} />
       <Comments />
     </Box>

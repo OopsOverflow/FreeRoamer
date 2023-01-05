@@ -20,17 +20,9 @@ export default function Post({ post }: { post: Post & { author: User } }) {
       maxW={'7xl'}
       px={{ base: 2, md: 5 }}
       pb={{ base: 16, md: 28 }}
-      mt={165}
+      mt={5}
     >
-      <PostPage
-        title={post.title}
-        description={post.description}
-        likes={11}
-        author={post.author.name as string}
-        images={post.images}
-        avatarUrl={post.author.image ?? ''}
-        time={post.timeToComplete ?? ''}
-      />
+      <PostPage post={post} />
     </Flex>
   );
 }
