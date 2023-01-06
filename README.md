@@ -50,11 +50,11 @@ a platform for hikers and outdoor enthusiasts to share and discover new trails.
 <br />
 
 ## Performance Improvements
-[x] SSG, ISR and SSR using Next.js
-[x] Blob storage for images and GPX files using AWS S3
-[x] Serverless functions
-[] Deploy Serveless to the Edge
-[] Lazy loading of images
+- [x] SSG, ISR and SSR using Next.js
+- [x] Blob storage for images and GPX files using AWS S3
+- [x] Serverless functions
+- [ ] Deploy Serveless to the Edge
+- [ ] Lazy loading of images
 
 
 <br />
