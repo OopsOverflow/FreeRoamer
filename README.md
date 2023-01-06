@@ -1,34 +1,94 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![TS](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-181818?style=for-the-badge&logo=supabase&logoColor=white)
+![AWS](
+https://img.shields.io/badge/Amazon_AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+<br />
+![React.js](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+
+<h1 align="center">
+FreeRoamer
+</h1>
+
+<h6 align="center">
+a platform for hikers and outdoor enthusiasts to share and discover new trails.
+<br />
+<a href="https://freeroamer.vercel.app/">View Demo</a>
+·
+<a href="https://github.com/OopsOverflow/FreeRoamer/issues">Report Bug</a>
+
+</h6>
+<div align="center">
+<img src="public/logo.png" width="50%" height="50%" alt="logo">
+</div>
+
+---
+
+<br />
+
+## Features
+- Upload GPX tracks and share them with others
+- Share photos and thoughts about your tracks
+- Like and comment on other users' posts
+- Realtime position tracking
+- Stats about your tracks, including average elevation gain and length
+
+<br />
+
+## Built With
+- [Next.js](https://nextjs.org/) hosted on [Vercel](https://vercel.com/)
+- [Chakra UI](https://chakra-ui.com/)
+- [Mapbox](https://www.mapbox.com/)
+- [Turf.js](https://turfjs.org/)
+- [AWS S3](https://aws.amazon.com/s3/)
+- [Prisma](https://www.prisma.io/)
+- [PostgreSQL](https://www.postgresql.org/) hosted on [Supabase](https://supabase.io/)
+- [NextAuth.js](https://next-auth.js.org/)
+- [TypeScript](https://www.typescriptlang.org/) 🖤
+
+<br />
+
+## Performance Improvements
+[x] SSG, ISR and SSR using Next.js
+[x] Blob storage for images and GPX files using AWS S3
+[x] Serverless functions
+[] Deploy Serveless to the Edge
+[] Lazy loading of images
+
+
+<br />
 
 ## Getting Started
 
-First, run the development server:
+To get a local copy up and running follow these simple steps:
 
-```bash
-npm run dev
-# or
-yarn dev
+1. Install NPM packages
+```sh
+npm install
+```
+2. Create a .env.local file in the root directory and add the following environment variables:
+```sh
+NEXTAUTH_URL=http://localhost:3000
+MAPBOX_TOKEN=
+DATABASE_URL=
+AWS_BUCKET_ACCESS_KEY_ID=
+AWS_BUCKET_SECRET_ACCESS_KEY=
+AWS_BUCKET_NAME=
+AWS_BUCKET_REGION=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Run the development server
+```sh
+npm run dev
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+<br />
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Gallery
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
